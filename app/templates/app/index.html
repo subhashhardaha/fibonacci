@@ -45,20 +45,31 @@
 {% if fibonacci_value and fibonacci_number %}
 
     <div class="alert alert-info col-sm-8">
-            {% with a=fibonacci_number %}
-            {% if a == '1' %}
-                 1<sup>st</sup> term of Fibonacci series
-            {% elif a == '2' %}
-                 2<sup>nd</sup> term of Fibonacci series
-            {% elif a == '3' %}
-                 3<sup>rd</sup> term of Fibonacci series
-            {% else %}
-                 {{ a }}<sup>th</sup> term of Fibonacci series
-            {% endif %}
+        <div>
 
-            {% endwith %}
-          <h5 style="word-wrap: break-word;">{{ fibonacci_value }}</h5>
+                {% with a=fibonacci_number %}
+                    {% if a == '1' %}
+                         1<sup>st</sup> term of Fibonacci series
+                    {% elif a == '2' %}
+                         2<sup>nd</sup> term of Fibonacci series
+                    {% elif a == '3' %}
+                         3<sup>rd</sup> term of Fibonacci series
+                    {% else %}
+                         {{ a }}<sup>th</sup> term of Fibonacci series
+                    {% endif %}
+
+                {% endwith %}
+
+            <button class="btn btn-outline-info btn-sm" script="float: right;" onclick="copyFunction()">Copy text</button>
+        </div>
+
+          <h5 style="word-wrap: break-word;" id="fibonacci_value">{{ fibonacci_value }}</h5>
     </div>
 {% endif %}
 
-{% endblock %}
+{% endblock content %}
+
+{% block extra_js %}
+
+{% endblock extra_js%}
+
