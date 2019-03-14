@@ -14,16 +14,34 @@
             </div>
         </div>
     </form>
-{% if time_taken %}
-<h4>Time Taken : {{ time_taken }}</h4>
+{% if total_time_taken %}
+<h4>Total Time Taken : {{ total_time_taken }}</h4>
+{% endif %}
+
+<!--{% if time_taken_direct %}-->
+<!--<h4>Time Taken Direct Method: {{ time_taken_direct }}</h4>-->
+<!--{% endif %}-->
+
+{% if time_taken_mat %}
+<h4>Time Taken Compute Matrix Multiplication: {{ time_taken_mat }}</h4>
 {% endif %}
 {% if fibonacci_value and fibonacci_number %}
 
+
+
 <div class="well well-sm col-sm-8">
+        {% with a=fibonacci_number %}
+        {% if a == '1' %}
+             <h4>1<sup>st</sup> term of Fibonacci series</h4>
+        {% elif a == '2' %}
+             <h4>2<sup>nd</sup> term of Fibonacci series</h4>
+        {% elif a == '3' %}
+             <h4>3<sup>rd</sup> term of Fibonacci series</h4>
+        {% else %}
+             <h4>{{ a }}<sup>th</sup> term of Fibonacci series</h4>
+        {% endif %}
 
-      <h4>{{ fibonacci_number }} th term of Fibonacci series</h4>
-
-
+        {% endwith %}
       <h4 style="word-wrap: break-word;">{{ fibonacci_value }}</h4>
 </div>
 {% endif %}
