@@ -19,6 +19,11 @@
 <!--{% if time_taken_direct %}-->
 <!--<h4>Time Taken Direct Method: {{ time_taken_direct }}</h4>-->
 <!--{% endif %}-->
+{% if message1 %}
+    <div class="alert alert-danger col-sm-8">
+        {{ message1 }}
+    </div>
+{% endif %}
 {% if message %}
     <div class="alert alert-success col-sm-8">
       {{ message }}

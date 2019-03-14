@@ -25,7 +25,7 @@ class Home(View):
         context = {}
         n=request.POST['fibonacci_number']
         key=str(n)
-        if n:
+        if int(n) > 0:
             context['fibonacci_number']=n
             if cache.get(key):
                 data = cache.get(key)
@@ -56,7 +56,8 @@ class Home(View):
                 cache.set(key, str(ans))
                 context['message'] = 'Calculated from function'
                 context['time_taken_mat'] = time_taken_mat
-
+        else:
+            context['message1'] = 'Enter postive number only'
         end = time.time()
         time_taken=str(timedelta(seconds=end-start))
         context['total_time_taken']=time_taken
