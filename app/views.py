@@ -7,6 +7,9 @@ from .models import Fibonacci
 from .utils import fibonacci_nth, MatrixFibonacci
 from datetime import timedelta
 
+from django.core.cache import cache
+
+
 # Create your views here.
 
 class Home(View):
@@ -21,16 +24,24 @@ class Home(View):
 
         context = {}
         n=request.POST['fibonacci_number']
-
+        key=str(n)
         if n:
             context['fibonacci_number']=n
+            if cache.get(key):
+                data = cache.get(key)
+                context['fibonacci_value'] = data
+                context['message'] = 'Fetched value from cache'
 
-            if Fibonacci.objects.filter(number=n).exists():
+
+            elif Fibonacci.objects.filter(number=n).exists():
                 obj = Fibonacci.objects.get(number=n)
                 value = obj.fib_value
                 context['fibonacci_value'] = value
                 #time_taken_direct='0'
-                time_taken_mat='0'
+                #time_taken_mat='0'
+                cache.set(key, str(value))
+                context['message'] = 'Fetched value from database'
+
             else:
                 # start_d = time.time()
                 # fibonacci_nth(int(n))
@@ -42,10 +53,14 @@ class Home(View):
                 context['fibonacci_value'] = ans
                 data = Fibonacci(number=n, fib_value=ans)
                 data.save()
+                cache.set(key, str(ans))
+                context['message'] = 'Calculated from function'
+                context['time_taken_mat'] = time_taken_mat
+
         end = time.time()
         time_taken=str(timedelta(seconds=end-start))
         context['total_time_taken']=time_taken
         #context['time_taken_direct'] = time_taken_direct
-        context['time_taken_mat'] = time_taken_mat
+
 
         return render(request, self.template_name, context)
