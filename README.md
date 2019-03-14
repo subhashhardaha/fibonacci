@@ -9,7 +9,7 @@ $ cd fibionacci
 $ source myvenv/bin/activate
 $ pip install -r requirements.txt
 $ python manage.py makemigrations app
-$ python manage.pymigrate
+$ python manage.py migrate
 $ python manage.py runserver
 ```
 
