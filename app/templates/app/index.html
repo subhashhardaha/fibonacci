@@ -4,8 +4,8 @@
    <form class="form-horizontal" method="POST">
        {% csrf_token %}
         <div class="form-group">
-            <div class="col-sm-8">
-                <input type="number" class="form-control" name="fibonacci_number" placeholder="Enter number">
+            <div class="col-sm-6">
+                <input type="number" class="form-control" name="fibonacci_number" placeholder="Enter number" required>
             </div>
         </div>
         <div class="form-group">
@@ -14,9 +14,18 @@
             </div>
         </div>
     </form>
-{% if fibonacci_value %}
-<h4>Fibonacci of the number is </h4>
-<p style="word-wrap: break-word;">{{ fibonacci_value }}</p>
+{% if time_taken %}
+<h4>Time Taken : {{ time_taken }}</h4>
+{% endif %}
+{% if fibonacci_value and fibonacci_number %}
+
+<div class="well well-sm col-sm-8">
+
+      <h4>{{ fibonacci_number }} th term of Fibonacci series</h4>
+
+
+      <h4 style="word-wrap: break-word;">{{ fibonacci_value }}</h4>
+</div>
 {% endif %}
 
 {% endblock %}
